@@ -1,0 +1,52 @@
+{
+  "name": "ecsr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register -r jsdom-global/register '**/*.spec.ts'",
+    "test:watch": "nodemon ./src --ext ts --exec 'npm test'",
+    "compile:watch": "gulp watch",
+    "eslint": "eslint --fix ./src/**/*.{ts,tsx}"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.2.1",
+    "del": "^5.1.0",
+    "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "mocha": "^6.2.2",
+    "pixi.js": "^5.2.0",
+    "ramda": "^0.26.1",
+    "redux-create-reducer": "^2.0.0",
+    "redux-observable": "^1.2.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "rxjs": "^6.5.4",
+    "typescript": "^3.7.4",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^13.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "browserify": "^16.5.0",
+    "canvas": "^2.6.1",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jsdom": "^15.2.1",
+    "jsdom-global": "^3.0.2",
+    "ts-node": "^8.6.1"
+  }
+}

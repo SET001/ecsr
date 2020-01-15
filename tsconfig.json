@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+    "types": ["node", "mocha", "pixi.js"],
+		"module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+		"lib": [
+			"es2016",
+      "dom",
+      "es6"
+    ],
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules",
+    "assets",
+    "publik",
+    "misc",
+    "distros",
+    "**/*.spec.ts"
+  ]
+}
