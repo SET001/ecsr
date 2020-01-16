@@ -12,3 +12,8 @@ export * from './system'
 export * from './systems'
 export * from './component'
 export * from './createApp'
+
+export * from './render'
+export * from './position'
+export * from './game'
+export * from './movements'

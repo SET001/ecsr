@@ -18,7 +18,7 @@ export const removeComponent = (component: RenderComponent)=>
 
 }
 
-export const init = (layers) => (dispatch: Dispatch, getState: ()=>RootState)=>{
+export const init = (layers: any) => (dispatch: Dispatch, getState: ()=>RootState)=>{
   const { container, app } = getState().render
   console.log({container, app})
   container.appendChild(app.view)

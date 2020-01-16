@@ -4,7 +4,7 @@ import { game, GameState } from '../lib/game'
 import { position } from '../lib/position'
 import { gameAddObject, gameTickAction } from '../lib/game/actions'
 import { movements, MovementComponent } from '../lib/movements'
-import { MovementSystemState, PixiRenderSystemState } from './systems'
+import { MovementSystemState, PixiRenderSystemState } from '../lib'
 import * as renderActions from '../lib/render/actions'
 import { render } from '../lib/render'
 
