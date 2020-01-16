@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js'
 import { createReducer } from 'redux-create-reducer'
 import { PixiRenderSystemState } from '.'
 import {updateSystemAction} from './actions'
-import { udpateFromPayload } from '../../../lib'
+import { udpateFromPayload } from '..'
 
 export const defaultState: PixiRenderSystemState = {
   app: new PIXI.Application(),

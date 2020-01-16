@@ -4,7 +4,7 @@ import { Dispatch } from '@reduxjs/toolkit'
 import { PositionComponent } from 'src/lib/components/position'
 import { positionAddAction } from './actions'
 import { gameAddComponentAction, GameAddComponentAction } from '../game/actions'
-import { Action } from '../../../lib'
+import { Action } from '..'
 
 export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action.pipe(
   ofType(gameAddComponentAction.type),

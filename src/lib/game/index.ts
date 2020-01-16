@@ -1,4 +1,4 @@
-import { System } from '../../../lib'
+import { System } from '..'
 import * as actions from './actions'
 import { reducer, defaultState } from './reducer'
 import { epic } from './epic'

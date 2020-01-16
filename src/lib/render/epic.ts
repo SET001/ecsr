@@ -3,7 +3,7 @@ import { gameAddComponentAction, GameAddComponentAction } from '../game/actions'
 import { filter, map } from 'rxjs/operators'
 import { Dispatch } from '@reduxjs/toolkit'
 import { RenderComponent } from '.'
-import { Action } from '../../../lib'
+import { Action } from '..'
 import { addComponent } from './actions'
 
 export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action.pipe(

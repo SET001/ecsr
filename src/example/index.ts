@@ -1,12 +1,12 @@
 import { PositionComponent } from '../lib/components/position'
 import { createApp, PositionSystemState } from '../lib'
-import { game, GameState } from './systems/game'
-import { position } from './systems/position'
-import { gameAddObject, gameTickAction } from './systems/game/actions'
-import { movements, MovementComponent } from './systems/movements'
+import { game, GameState } from '../lib/game'
+import { position } from '../lib/position'
+import { gameAddObject, gameTickAction } from '../lib/game/actions'
+import { movements, MovementComponent } from '../lib/movements'
 import { MovementSystemState, PixiRenderSystemState } from './systems'
-import * as renderActions from './systems/render/actions'
-import { render } from './systems/render'
+import * as renderActions from '../lib/render/actions'
+import { render } from '../lib/render'
 
 export interface RootState {
   game: GameState
@@ -36,7 +36,5 @@ export interface RootState {
   await app.store.dispatch(gameTickAction())
   await app.store.dispatch(gameTickAction())
   await app.store.dispatch(gameTickAction())
-  console.log(app.store.getState())
-  console.log(app.store.getState().position)
   console.log('done')
 })()

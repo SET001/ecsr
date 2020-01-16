@@ -7,7 +7,7 @@ import { gameTickAction, gameAddComponentAction, GameAddComponentAction } from '
 import { positionBulkUpdateAction } from '../position/actions'
 import { movementsAddAction } from './actions'
 import { MovementComponent } from '.'
-import { Action } from '../../../lib'
+import { Action } from '..'
 
 export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action.pipe(
   ofType(gameAddComponentAction.type),

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { PositionComponent } from '../../../lib/components'
+import { PositionComponent } from '../components'
 
 export const positionBulkUpdateAction = createAction<PositionComponent[]>('position/bulkUpdate')
 export const positionUpdateAction = createAction<PositionComponent>('position/update')

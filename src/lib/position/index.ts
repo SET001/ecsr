@@ -1,7 +1,7 @@
-import { System } from '../../../lib'
+import { System } from '..'
 import * as actions from './actions'
 import { reducer, defaultState } from './reducer'
-import { PositionSystemState } from '../../../lib/systems'
+import { PositionSystemState } from '../systems'
 import { epic } from './epic'
 
 export const position: System<PositionSystemState> = {

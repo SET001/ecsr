@@ -12,7 +12,7 @@
       "dom",
       "es6"
     ],
-    "baseUrl": "."
+    "baseUrl": "./src"
   },
   "exclude": [
     "node_modules",

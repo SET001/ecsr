@@ -1,6 +1,6 @@
 import { createAction, Dispatch } from '@reduxjs/toolkit'
-import { Component } from '../../../lib'
-import { RootState } from '../../index'
+import { Component } from '..'
+import { RootState } from '../../example/index'
 
 //  TODO; what is the game object in terms of engine?
 export type GameObject = {[key: string]:Component}

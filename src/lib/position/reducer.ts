@@ -1,8 +1,8 @@
 import { createReducer } from 'redux-create-reducer'
-import { Action, addFromPayload } from '../../../lib'
+import { Action, addFromPayload } from '..'
 import { positionBulkUpdateAction, positionAddAction } from './actions'
-import { PositionComponent } from '../../../lib/components/position'
-import { PositionSystemState } from '../../../lib/systems'
+import { PositionComponent } from '../components/position'
+import { PositionSystemState } from '../systems'
 
 export const defaultState: PositionSystemState = {
   objects: [],

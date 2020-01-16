@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-create-reducer'
-import { increment } from '../../../lib'
+import { increment } from '..'
 import {
   gameTickAction, gameAddComponentAction, gameAddObjectAction,
 } from './actions'
