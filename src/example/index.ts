@@ -4,19 +4,20 @@ import { game, GameState } from './systems/game'
 import { position } from './systems/position'
 import { gameAddObject, gameTickAction } from './systems/game/actions'
 import { movements, MovementComponent } from './systems/movements'
-import { MovementSystemState } from './systems'
-// import { render } from './systems/render'
+import { MovementSystemState, PixiRenderSystemState } from './systems'
+import * as renderActions from './systems/render/actions'
+import { render } from './systems/render'
 
 export interface RootState {
   game: GameState
   position: PositionSystemState
   movements: MovementSystemState
-  // render: RenderSystemState
+  render: PixiRenderSystemState
 }
 
 (async () => {
   const app = createApp({
-    game, position, movements,
+    game, position, movements, render
   })
   console.log('app created, running...')
   app.run()
@@ -24,7 +25,13 @@ export interface RootState {
     position: new PositionComponent(),
     movements: new MovementComponent(),
   }
-  
+
+  await app.store.dispatch(renderActions.updateSystemAction({
+    container: document.getElementById('viewport')
+  }))
+  await app.store.dispatch(renderActions.init)
+  await app.store.dispatch(renderActions.run)
+
   await app.store.dispatch(gameAddObject(obj))
   await app.store.dispatch(gameTickAction())
   await app.store.dispatch(gameTickAction())

@@ -1,11 +1,24 @@
-import { Component } from '../../../lib'
+import { Component, System } from '../../../lib'
+import * as actions from './actions'
+import { reducer, defaultState } from './reducer'
+import {epic} from './epic'
 
-export interface RenderComponent extends Component{
-  viewClass: any
+export class RenderComponent extends Component{
+  mesh: any
+  layer: any
 }
 
-export interface RenderSystemState{
+export interface PixiRenderSystemState{
+  app: PIXI.Application
   components: RenderComponent[]
+  stage: PIXI.Container
+  layers: PIXI.Container[]
+  container: HTMLElement
 }
 
-export * from './reducer'
+export const render: System<PixiRenderSystemState> = {
+  actions,
+  reducer,
+  defaultState,
+  epic,
+}
