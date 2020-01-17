@@ -16,9 +16,9 @@ export interface PixiRenderSystemState{
   container: HTMLElement
 }
 
-export const render: System<PixiRenderSystemState> = {
+export const Render = (): System<PixiRenderSystemState> => ({
   actions,
   reducer,
   defaultState,
   epic,
-}
+})

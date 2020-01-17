@@ -1,7 +1,6 @@
 import { combineEpics, ActionsObservable, ofType } from 'redux-observable'
 import { map, filter } from 'rxjs/operators'
-import { RootState } from 'src/example'
-import { Dispatch } from '@reduxjs/toolkit'
+import { RootState, AppDispatch } from 'src/example'
 import { PositionComponent } from 'src/lib/components'
 import { gameTickAction, gameAddComponentAction, GameAddComponentAction } from '../game/actions'
 import { positionBulkUpdateAction } from '../position/actions'
@@ -12,7 +11,7 @@ import { Action } from '..'
 export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action.pipe(
   ofType(gameAddComponentAction.type),
   filter((action: Action<GameAddComponentAction<MovementComponent>>) => action.payload.component.name === 'MovementComponent'),
-  map((action) => (dispatch: Dispatch) => {
+  map((action) => (dispatch: AppDispatch) => {
     const { component, componentID, gameID } = action.payload
     dispatch(movementsAddAction({
       ...component,
@@ -27,7 +26,7 @@ export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action
 */
 export const movementsGameTickEpic = ($action: ActionsObservable<any>) => $action.pipe(
   ofType(gameTickAction.type),
-  map(() => async (dispatch: Dispatch, getState: ()=>RootState) => {
+  map(() => async (dispatch: AppDispatch, getState: ()=>RootState) => {
     const { movements, position } = getState()
     const objects = movements.objects.map((obj) => ({
       move: obj,

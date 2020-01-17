@@ -1,6 +1,7 @@
+import { ThunkDispatch } from 'redux-thunk'
 import { PositionComponent } from '../lib/components/position'
 import {
-  createApp, PositionSystemState, MovementSystemState, PixiRenderSystemState,
+  createApp, PositionSystemState, MovementSystemState, PixiRenderSystemState, Action,
 } from '../lib'
 import { game, GameState } from '../lib/game'
 import { position } from '../lib/position'
@@ -17,11 +18,13 @@ export interface RootState {
   render: PixiRenderSystemState
 }
 
+export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
+
 (async () => {
   const app = createApp({
     game, position, movements, render,
   })
-  app.run()
+  // app.run()
   const obj = {
     position: new PositionComponent(),
     movements: new MovementComponent(),

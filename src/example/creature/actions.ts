@@ -1,9 +1,10 @@
 import { PositionComponent } from 'src/lib/components'
-import { Dispatch } from '@reduxjs/toolkit'
+
 import { gameAddObject } from '../../lib/game/actions'
 import { MovementComponent, RenderComponent } from '../../lib'
+import { AppDispatch } from '..'
 
-export const createCreature = (layer) => (dispatch: Dispatch<any>) => {
+export const createCreature = (layer) => (dispatch: AppDispatch) => {
   const object = {
     position: new PositionComponent(),
     // health: new HealthComponent(),
