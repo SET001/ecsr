@@ -12,7 +12,6 @@
       "dom",
       "es6"
     ],
-    "baseUrl": "./src"
   },
   "exclude": [
     "node_modules",
