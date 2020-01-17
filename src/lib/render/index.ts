@@ -1,9 +1,9 @@
 import { Component, System } from '..'
 import * as actions from './actions'
 import { reducer, defaultState } from './reducer'
-import {epic} from './epic'
+import { epic } from './epic'
 
-export class RenderComponent extends Component{
+export class RenderComponent extends Component {
   mesh: any
   layer: any
 }

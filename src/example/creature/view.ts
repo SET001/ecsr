@@ -1,6 +1,4 @@
-export class Jelly{
-  render(){
-    
-  }
-
+export class Jelly {
+  // render() {
+  // }
 }

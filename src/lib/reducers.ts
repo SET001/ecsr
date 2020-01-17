@@ -21,7 +21,7 @@ export const addFromPayload = <T>(to?: ArrayKeys<T>) =>
     }
     : { ...state, ...payload })
 
-export const udpateFromPayload = <T>(state: any, { payload }: Action<T>) =>({
+export const udpateFromPayload = <T>(state: any, { payload }: Action<T>) => ({
   ...state,
-  ...payload
+  ...payload,
 })

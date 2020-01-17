@@ -43,8 +43,5 @@ export const store = <S>(systems: Systems): Store<any, any> => {
 
 export const createApp = (systems: Systems) => ({
   store: store(systems),
-  run() {
-    const state = this.store.getState()
-    console.log({ state })
-  },
+  // run() { },
 })

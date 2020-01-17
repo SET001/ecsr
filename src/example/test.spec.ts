@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createApp } from '../lib/createApp'
 import { game } from './systems/game'
 import { position } from './systems/position'

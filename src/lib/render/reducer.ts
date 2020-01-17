@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import { createReducer } from 'redux-create-reducer'
 import { PixiRenderSystemState } from '.'
-import {updateSystemAction} from './actions'
+import { updateSystemAction } from './actions'
 import { udpateFromPayload } from '..'
 
 export const defaultState: PixiRenderSystemState = {
@@ -9,9 +9,9 @@ export const defaultState: PixiRenderSystemState = {
   components: [],
   container: null,
   stage: new PIXI.Container(),
-  layers: []
+  layers: [],
 }
 
 export const reducer = createReducer(defaultState, {
-  [updateSystemAction.type]: udpateFromPayload
+  [updateSystemAction.type]: udpateFromPayload,
 })

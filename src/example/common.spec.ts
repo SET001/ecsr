@@ -15,7 +15,8 @@
 // class Bug {}
 
 // const selectPositions = (state: RootState) => state.position
-// const selectViews = (state: RootState) => state.render.components.filter((view) => view.viewClass === Bug)
+// const selectViews = (state: RootState) =>
+//  state.render.components.filter((view) => view.viewClass === Bug)
 
 // const selectRelatedPositions = createSelector(
 //   [selectPositions, selectViews],
