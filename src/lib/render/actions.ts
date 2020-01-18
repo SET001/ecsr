@@ -1,7 +1,9 @@
-import { RootState, AppDispatch } from 'src/example'
-import { createAction } from '@reduxjs/toolkit'
+// import { AppDispatch } from 'src/example'
+import { createAction, Dispatch } from '@reduxjs/toolkit'
+import {
+  PixiRenderSystemState, RenderComponent, RootDependencies,
+} from './index'
 
-import { PixiRenderSystemState, RenderComponent } from '.'
 
 export const updateSystemAction = createAction<Partial<PixiRenderSystemState>>('render/updateSystem')
 export const addComponentAction = createAction<RenderComponent>('render/add')
@@ -20,13 +22,13 @@ export const addRemoveAction = createAction<RenderComponent>('render/remove')
 
 export const init = (
   // layers: any
-) => (dispatch: AppDispatch, getState: ()=>RootState) => {
+) => (dispatch: Dispatch, getState: ()=>RootDependencies) => {
   const { container, app } = getState().render
   container.appendChild(app.view)
   // window.addEventListener('resize', () => dispatch(resize))
 }
 
-export const run = (dispatch: AppDispatch, getState: ()=>RootState) => {
+export const run = (dispatch: Dispatch, getState: ()=>RootDependencies) => {
   const { app, stage } = getState().render
   app.renderer.render(stage)
   app.renderer.gl.flush()

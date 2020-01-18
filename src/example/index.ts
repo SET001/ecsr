@@ -9,14 +9,24 @@ import { gameAddObject, gameTickAction } from '../lib/game/actions'
 import { movements, MovementComponent } from '../lib/movements'
 
 import * as renderActions from '../lib/render/actions'
-import { render } from '../lib/render'
+import { Render, RenderSystemDependencies } from '../lib/render'
 
-export interface RootState {
-  game: GameState
+const render = Render({} as any)
+
+type PeahthSystemState = {}
+interface HealthSystemDependencies{
   position: PositionSystemState
-  movements: MovementSystemState
-  render: PixiRenderSystemState
+  health: PeahthSystemState
 }
+export interface RootState extends RenderSystemDependencies, HealthSystemDependencies{
+
+}
+// export interface RootState extends SystemsDependensies{
+//   game: GameState
+//   position: PositionSystemState
+//   movements: MovementSystemState
+//   render: PixiRenderSystemState
+// }
 
 export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
 
@@ -29,7 +39,7 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
     position: new PositionComponent(),
     movements: new MovementComponent(),
   }
-
+  // (app.store.getState() as RootState).
   await app.store.dispatch(renderActions.updateSystemAction({
     container: document.getElementById('viewport'),
   }))

@@ -1,7 +1,8 @@
 import { Component, System } from '..'
 import * as actions from './actions'
-import { reducer, defaultState } from './reducer'
+import { reducer } from './reducer'
 import { epic } from './epic'
+import { PositionSystemState } from '../systems'
 
 export class RenderComponent extends Component {
   mesh: any
@@ -15,10 +16,15 @@ export interface PixiRenderSystemState{
   layers: PIXI.Container[]
   container: HTMLElement
 }
+export interface RenderSystemDependencies{
+  render: PixiRenderSystemState
+  position: PositionSystemState
+}
 
-export const Render = (): System<PixiRenderSystemState> => ({
+export const Render = (
+  config: PixiRenderSystemState,
+): System<PixiRenderSystemState> => ({
   actions,
-  reducer,
-  defaultState,
+  reducer: reducer(config),
   epic,
 })
