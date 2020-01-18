@@ -24,14 +24,12 @@ const epic = (systems: Systems) => {
 }
 
 const reducer = reduceSystems('reducer')
-const defaultState = reduceSystems('defaultState')
 
-export const store = <S>(systems: Systems): Store<any, any> => {
+export const store = <S>(systems: Systems, config: S): Store<S, any> => {
   const epicMiddleware = createEpicMiddleware<any, any, any, void>()
-  // console.log({ defaultState: defaultState(systems), reducers: reducer(systems) })
   const s = createStore<any, any, any, any>(
     combineReducers(reducer(systems)),
-    defaultState(systems),
+    config,
     applyMiddleware(
       thunk,
       epicMiddleware,
@@ -41,7 +39,7 @@ export const store = <S>(systems: Systems): Store<any, any> => {
   return s
 }
 
-export const createApp = (systems: Systems) => ({
-  store: store(systems),
+export const createApp = <S>(systems: Systems, config: S) => ({
+  store: store(systems, config),
   // run() { },
 })
