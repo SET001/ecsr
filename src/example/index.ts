@@ -1,25 +1,20 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { PositionComponent } from '../lib/components/position'
 import {
-  createApp, PositionSystemState, MovementSystemState, PixiRenderSystemState, Action,
+  createApp, Action,
 } from '../lib'
-import { game, GameState } from '../lib/game'
+import { game } from '../lib/game'
 import { position } from '../lib/position'
 import { gameAddObject, gameTickAction } from '../lib/game/actions'
 import { movements, MovementComponent } from '../lib/movements'
 
 import * as renderActions from '../lib/render/actions'
-import { Render, RenderSystemDependencies } from '../lib/render'
+import { render, RenderSystemDependencies } from '../lib/render'
+import { config } from './config'
 
-const render = Render({} as any)
-
-type PeahthSystemState = {}
-interface HealthSystemDependencies{
-  position: PositionSystemState
-  health: PeahthSystemState
-}
-export interface RootState extends RenderSystemDependencies, HealthSystemDependencies{
-
+export interface RootState extends
+  RenderSystemDependencies
+  {
 }
 // export interface RootState extends SystemsDependensies{
 //   game: GameState
@@ -33,7 +28,7 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
 (async () => {
   const app = createApp({
     game, position, movements, render,
-  })
+  }, config)
   // app.run()
   const obj = {
     position: new PositionComponent(),

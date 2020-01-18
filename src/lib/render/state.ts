@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import { PixiRenderSystemState } from '.'
 
-export const defaultState: PixiRenderSystemState = {
+export const state: PixiRenderSystemState = {
   app: new PIXI.Application(),
   components: [],
   container: null,

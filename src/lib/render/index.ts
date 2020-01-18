@@ -21,10 +21,8 @@ export interface RenderSystemDependencies{
   position: PositionSystemState
 }
 
-export const Render = (
-  config: PixiRenderSystemState,
-): System<PixiRenderSystemState> => ({
+export const render: System<PixiRenderSystemState> = ({
   actions,
-  reducer: reducer(config),
+  reducer,
   epic,
 })
