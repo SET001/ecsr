@@ -1,6 +1,5 @@
-import { createAction } from '@reduxjs/toolkit'
-import { Component } from '..'
-import { RootState, AppDispatch } from '../../example/index'
+import { createAction, Dispatch } from '@reduxjs/toolkit'
+import { Component, GameSystemDependencies } from '..'
 
 //  TODO; what is the game object in terms of engine?
 export type GameObject = {[key: string]:Component}
@@ -17,7 +16,7 @@ export const gameAddComponentAction = createAction<GameAddComponentAction>('game
 export const gameRemoveComponentAction = createAction<Component>('game/removeComponent')
 
 export const gameAddObject = (object:GameObject) =>
-  async (dispatch: AppDispatch, getState: ()=>RootState) => {
+  async (dispatch: Dispatch, getState: ()=>GameSystemDependencies) => {
     await dispatch(gameAddObjectAction())
     const { gameID } = getState().game
     await Promise.all(Object.entries(object).map(async ([, component]) => {
