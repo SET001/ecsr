@@ -6,6 +6,7 @@ module.exports = {
     ecmaVersion:  2018,
     sourceType:  "module"
   },
+  ignorePatterns: ['dist/', 'node_modules/'],
   rules:{
     semi: ["error", "never"],
     "import/no-cycle": "off",
