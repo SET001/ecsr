@@ -5,7 +5,10 @@ import {
 } from '../lib'
 import { game } from '../lib/game'
 import { position } from '../lib/position'
-import { gameAddObject, gameTickAction } from '../lib/game/actions'
+import {
+  gameAddObject,
+  // gameTickAction
+} from '../lib/game/actions'
 import { movement, MovementComponent } from '../lib/movement'
 
 import * as renderActions from '../lib/render/actions'
@@ -43,7 +46,7 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
   await app.store.dispatch(renderActions.run)
 
   await app.store.dispatch(gameAddObject(obj))
-  await app.store.dispatch(gameTickAction())
-  await app.store.dispatch(gameTickAction())
-  await app.store.dispatch(gameTickAction())
+  // await app.store.dispatch(gameTickAction())
+  // await app.store.dispatch(gameTickAction())
+  // await app.store.dispatch(gameTickAction())
 })()

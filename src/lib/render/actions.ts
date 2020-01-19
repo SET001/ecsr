@@ -20,9 +20,7 @@ export const addRemoveAction = createAction<RenderComponent>('render/remove')
 
 //   }
 
-export const init = (
-  // layers: any
-) => (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
+export const init = (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
   const { container, app } = getState().render
   container.appendChild(app.view)
   // window.addEventListener('resize', () => dispatch(resize))
