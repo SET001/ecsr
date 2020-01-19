@@ -22,11 +22,11 @@ export const addRemoveAction = createAction<RenderComponent>('render/remove')
 //   }
 
 export const init = async (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
-  const app = new PIXI.Application()
   await dispatch(updateSystemAction({
-    app,
+    app: new PIXI.Application(),
   }))
 
+  const { app } = getState().render
   const { container } = getState().render
   container.appendChild(app.view)
   // window.addEventListener('resize', () => dispatch(resize))
@@ -34,7 +34,6 @@ export const init = async (dispatch: Dispatch, getState: ()=>RenderSystemDepende
 
 export const run = (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
   const { app, stage } = getState().render
-  console.log({ app }, { ...app }, app.view)
   app.renderer.render(stage)
   app.renderer.gl.flush()
 
