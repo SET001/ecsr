@@ -1,5 +1,6 @@
 // import { AppDispatch } from 'src/example'
 import { createAction, Dispatch } from '@reduxjs/toolkit'
+import * as PIXI from 'pixi.js'
 import {
   PixiRenderSystemState, RenderComponent, RenderSystemDependencies,
 } from './index'
@@ -20,14 +21,20 @@ export const addRemoveAction = createAction<RenderComponent>('render/remove')
 
 //   }
 
-export const init = (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
-  const { container, app } = getState().render
+export const init = async (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
+  const app = new PIXI.Application()
+  await dispatch(updateSystemAction({
+    app,
+  }))
+
+  const { container } = getState().render
   container.appendChild(app.view)
   // window.addEventListener('resize', () => dispatch(resize))
 }
 
 export const run = (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
   const { app, stage } = getState().render
+  console.log({ app }, { ...app }, app.view)
   app.renderer.render(stage)
   app.renderer.gl.flush()
 

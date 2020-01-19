@@ -3,10 +3,8 @@ import { Action, addFromPayload } from '..'
 import { positionBulkUpdateAction, positionAddAction } from './actions'
 import { PositionComponent } from '../components/position'
 import { PositionSystemState } from '../systems'
+import { state as defaultState } from './state'
 
-export const defaultState: PositionSystemState = {
-  objects: [],
-}
 export const reducer = createReducer(defaultState, {
   [positionBulkUpdateAction.type]: (
     state: PositionSystemState,

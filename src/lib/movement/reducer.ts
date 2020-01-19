@@ -1,11 +1,8 @@
 import { createReducer } from 'redux-create-reducer'
-import { MovementSystemState } from '.'
+import { state } from './state'
 import { movementsAddAction } from './actions'
 import { addFromPayload } from '../reducers'
 
-export const defaultState: MovementSystemState = {
-  objects: [],
-}
-export const reducer = createReducer(defaultState, {
+export const reducer = createReducer(state, {
   [movementsAddAction.type]: addFromPayload('objects'),
 })

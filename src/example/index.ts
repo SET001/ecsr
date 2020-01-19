@@ -1,30 +1,31 @@
 import { ThunkDispatch } from 'redux-thunk'
+
 import { PositionComponent } from '../lib/components/position'
 import {
-  createApp, Action,
+  createApp, Action, PositionSystemState,
 } from '../lib'
-import { game } from '../lib/game'
+import { game, GameState } from '../lib/game'
 import { position } from '../lib/position'
 import {
   gameAddObject,
   // gameTickAction
 } from '../lib/game/actions'
-import { movement, MovementComponent } from '../lib/movement'
+import { movement, MovementComponent, MovementSystemState } from '../lib/movement'
 
 import * as renderActions from '../lib/render/actions'
-import { render, RenderSystemDependencies } from '../lib/render'
+import { render, PixiRenderSystemState } from '../lib/render'
 import { config } from './config'
 
-export interface RootState extends
-  RenderSystemDependencies
-  {
+
+// export type RootState = RenderSystemDependencies & GameSystemDependencies
+
+
+export interface RootState{
+  game: GameState
+  position: PositionSystemState
+  movements: MovementSystemState
+  render: PixiRenderSystemState
 }
-// export interface RootState extends SystemsDependensies{
-//   game: GameState
-//   position: PositionSystemState
-//   movements: MovementSystemState
-//   render: PixiRenderSystemState
-// }
 
 export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
 
@@ -33,7 +34,8 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
     game, position, movement, render,
   }, config)
   // app.run()
-  console.log(app.store.getState())
+  const state = app.store.getState()
+  console.log({ state })
   const obj = {
     position: new PositionComponent(),
     movement: new MovementComponent(),
