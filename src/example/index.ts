@@ -6,7 +6,7 @@ import {
 import { game } from '../lib/game'
 import { position } from '../lib/position'
 import { gameAddObject, gameTickAction } from '../lib/game/actions'
-import { movements, MovementComponent } from '../lib/movements'
+import { movement, MovementComponent } from '../lib/movement'
 
 import * as renderActions from '../lib/render/actions'
 import { render, RenderSystemDependencies } from '../lib/render'
@@ -27,12 +27,13 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
 
 (async () => {
   const app = createApp({
-    game, position, movements, render,
+    game, position, movement, render,
   }, config)
   // app.run()
+  console.log(app.store.getState())
   const obj = {
     position: new PositionComponent(),
-    movements: new MovementComponent(),
+    movement: new MovementComponent(),
   }
   // (app.store.getState() as RootState).
   await app.store.dispatch(renderActions.updateSystemAction({

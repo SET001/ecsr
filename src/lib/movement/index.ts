@@ -18,7 +18,7 @@ export interface MovementSystemDependencies{
   position: PositionSystemState
 }
 
-export const movements: System<MovementSystemState> = {
+export const movement: System<MovementSystemState> = {
   actions,
   reducer,
   epic,
