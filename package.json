@@ -7,7 +7,8 @@
     "test": "mocha -r ts-node/register -r jsdom-global/register '**/*.spec.ts'",
     "test:watch": "nodemon ./src --ext ts --exec 'npm test'",
     "compile:watch": "gulp watch",
-    "eslint": "eslint --fix ./src/**/*.{ts,tsx}"
+    "eslint": "eslint --fix ./src/**/*.{ts,tsx}",
+    "checkCD": "madge --circular src/example/index.ts"
   },
   "keywords": [],
   "author": "",
