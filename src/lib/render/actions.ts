@@ -9,7 +9,7 @@ import {
 export const updateSystemAction = createAction<Partial<PixiRenderSystemState>>('render/updateSystem')
 export const addComponentAction = createAction<RenderComponent>('render/add')
 export const addRemoveAction = createAction<RenderComponent>('render/remove')
-
+export const initialisedAction = createAction('render/initialised')
 // export const addComponent = (component: RenderComponent) =>
 //   (dispatch: Dispatch, getState: ()=>RootState) => {
 
@@ -21,7 +21,7 @@ export const addRemoveAction = createAction<RenderComponent>('render/remove')
 
 //   }
 
-export const init = async (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
+export const init = () => async (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
   await dispatch(updateSystemAction({
     app: new PIXI.Application(),
   }))

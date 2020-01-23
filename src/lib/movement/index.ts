@@ -4,9 +4,12 @@ import { reducer } from './reducer'
 import { epic } from './epic'
 import { PositionSystemState } from '../systems'
 import { state } from './state'
+import { render } from '../render/index'
+import { position } from '../position/index'
 
 export interface MovementSystemState{
   objects: MovementComponent[]
+  depsinits: any[]
 }
 
 export class MovementComponent extends Component {
@@ -24,4 +27,5 @@ export const movement: System<MovementSystemState> = {
   reducer,
   epic,
   state,
+  deps: [render, position],
 }

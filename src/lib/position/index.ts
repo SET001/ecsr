@@ -10,4 +10,5 @@ export const position: System<PositionSystemState> = {
   reducer,
   epic,
   state,
+  deps: [],
 }

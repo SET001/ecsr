@@ -27,4 +27,5 @@ export const render: System<PixiRenderSystemState> = ({
   reducer,
   epic,
   state,
+  deps: [],
 })

@@ -5,3 +5,7 @@ export const positionBulkUpdateAction = createAction<PositionComponent[]>('posit
 export const positionUpdateAction = createAction<PositionComponent>('position/update')
 export const positionAddAction = createAction<PositionComponent>('position/add')
 export const positionRemoveAction = createAction<PositionComponent>('position/remove')
+export const initialisedAction = createAction('position/initialised')
+
+export const init = () => async () => new Promise((resolve) =>
+  setTimeout(resolve, 3000))

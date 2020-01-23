@@ -6,5 +6,6 @@ export interface System<T = any>{
   epic: Epic
   actions: any //  TODO: define type
   state: T
+  deps: System[]
   // components: ComponentConstructor[]
 }

@@ -19,4 +19,5 @@ export const game: System<GameState> = {
   reducer,
   epic,
   state,
+  deps: [],
 }
