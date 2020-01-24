@@ -9,7 +9,6 @@ import { position } from '../position/index'
 
 export interface MovementSystemState{
   objects: MovementComponent[]
-  depsinits: any[]
 }
 
 export class MovementComponent extends Component {
