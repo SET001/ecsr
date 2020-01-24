@@ -1,10 +1,7 @@
-import * as PIXI from 'pixi.js'
-import { PixiRenderSystemState } from '.'
+import { RenderSystemState } from '.'
 
-export const state: PixiRenderSystemState = {
-  app: null,
+export const state: RenderSystemState = {
+  engine: null,
   components: [],
   container: null,
-  stage: new PIXI.Container(),
-  layers: [],
 }

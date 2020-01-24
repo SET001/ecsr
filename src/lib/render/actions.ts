@@ -1,12 +1,14 @@
 // import { AppDispatch } from 'src/example'
 import { createAction, Dispatch } from '@reduxjs/toolkit'
-import * as PIXI from 'pixi.js'
 import {
-  PixiRenderSystemState, RenderComponent, RenderSystemDependencies,
+  RenderSystemState, RenderComponent, RenderSystemDependencies,
 } from './index'
+import { Action } from '..'
+import { GameAddComponentAction } from '../game/actions'
+import { PixiRender } from './pixiRender'
 
 
-export const updateSystemAction = createAction<Partial<PixiRenderSystemState>>('render/updateSystem')
+export const updateSystemAction = createAction<Partial<RenderSystemState>>('render/updateSystem')
 export const addComponentAction = createAction<RenderComponent>('render/add')
 export const addRemoveAction = createAction<RenderComponent>('render/remove')
 export const initialisedAction = createAction('render/initialised')
@@ -23,24 +25,24 @@ export const initialisedAction = createAction('render/initialised')
 
 export const init = () => async (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
   await dispatch(updateSystemAction({
-    app: new PIXI.Application(),
+    engine: new PixiRender(),
   }))
-
-  const { app } = getState().render
-  const { container } = getState().render
-  container.appendChild(app.view)
-  // window.addEventListener('resize', () => dispatch(resize))
-}
-
-export const run = (dispatch: Dispatch, getState: ()=>RenderSystemDependencies) => {
-  const { app, stage } = getState().render
-  app.renderer.render(stage)
-  app.renderer.gl.flush()
+  const { container, engine } = getState().render
+  engine.init(container)
 
   const renderLoop = () => {
+    engine.render()
     requestAnimationFrame(renderLoop)
   }
   renderLoop()
+}
+
+export const addObject = (action: Action<GameAddComponentAction<RenderComponent>>) => (
+  dispatch: Dispatch,
+  getState: ()=>RenderSystemDependencies,
+) => {
+  const { engine } = getState().render
+  engine.addMesh(action.payload.component.mesh)
 }
 
 

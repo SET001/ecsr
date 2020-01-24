@@ -7,7 +7,7 @@ import { game, GameState } from '../lib/game'
 import { position } from '../lib/position'
 import { movement, MovementSystemState } from '../lib/movement'
 
-import { render, PixiRenderSystemState } from '../lib/render'
+import { render, RenderSystemState } from '../lib/render'
 import { config } from './config'
 import { createCreature } from './creature/actions'
 
@@ -19,7 +19,7 @@ export interface RootState{
   game: GameState
   position: PositionSystemState
   movement: MovementSystemState
-  render: PixiRenderSystemState
+  render: RenderSystemState
 }
 
 export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;

@@ -12,19 +12,23 @@ export class RenderComponent extends Component {
   ) { super() }
 }
 
-export interface PixiRenderSystemState{
-  app: PIXI.Application
+export interface RenderEngine{
+  init(...args: any[]): void
+  render(): void
+  addMesh(mesh: any): void
+  removeMesh(mesh: any): void
+}
+export interface RenderSystemState{
   components: RenderComponent[]
-  stage: PIXI.Container
-  layers: PIXI.Container[]
   container: HTMLElement
+  engine: RenderEngine
 }
 export interface RenderSystemDependencies{
-  render: PixiRenderSystemState
+  render: RenderSystemState
   position: PositionSystemState
 }
 
-export const render: System<PixiRenderSystemState> = ({
+export const render: System<RenderSystemState> = ({
   actions,
   reducer,
   epic,
