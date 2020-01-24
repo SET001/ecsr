@@ -6,8 +6,10 @@ import { PositionSystemState } from '../systems'
 import { state } from './state'
 
 export class RenderComponent extends Component {
-  mesh: any
-  layer: any
+  constructor(
+    public mesh: any,
+    public layer?: any,
+  ) { super() }
 }
 
 export interface PixiRenderSystemState{

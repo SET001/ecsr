@@ -8,7 +8,10 @@ export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action
   ofType(gameAddComponentAction.type),
   //  TODO avoid string usage
   filter((action: Action<GameAddComponentAction<RenderComponent>>) => action.payload.component.name === 'RenderComponent'),
-  map(() => ({})),
+  map((action) => {
+    console.log(`RENDER SYSTEM: on ${gameAddComponentAction.type}`, action)
+    return { type: 'noop' }
+  }),
 )
 
 export const epic = combineEpics(

@@ -1,4 +1,5 @@
+import * as PIXI from 'pixi.js'
+
 export class Jelly {
-  // render() {
-  // }
+  mesh = PIXI.Sprite.from('images/blobsheet_0.bmp')
 }

@@ -9,6 +9,7 @@ import { movement, MovementSystemState } from '../lib/movement'
 
 import { render, PixiRenderSystemState } from '../lib/render'
 import { config } from './config'
+import { createCreature } from './creature/actions'
 
 
 // export type RootState = RenderSystemDependencies & GameSystemDependencies
@@ -35,6 +36,7 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, Action>;
   //   movement: new MovementComponent(),
   // }
   await app.init()
+  app.store.dispatch(createCreature({}))
 
   // await app.store.dispatch(renderActions.init)
   // // (app.store.getState() as RootState).
