@@ -6,6 +6,3 @@ export const positionUpdateAction = createAction<PositionComponent>('position/up
 export const positionAddAction = createAction<PositionComponent>('position/add')
 export const positionRemoveAction = createAction<PositionComponent>('position/remove')
 export const initialisedAction = createAction('position/initialised')
-
-export const init = () => async () => new Promise((resolve) =>
-  setTimeout(resolve, 3000))
