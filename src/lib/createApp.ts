@@ -60,21 +60,26 @@ export const isDepsSatisfied = (initilizedSystems: Systems) => (system: System) 
 }
 
 export const init = (dispatch: any) => async (systems: Systems) => {
-  console.log({ dispatch })
   let initialised:Systems = {}
   let pending = {
     ...systems,
   }
   const ff = (where: Systems) => (system: System) => Object.values(where).includes(system)
   let systemsWithAvailableDependencies: Systems = {}
+  /* eslint-disable no-await-in-loop */
   do {
     systemsWithAvailableDependencies = filter(isDepsSatisfied(initialised))(pending)
-    await Promise.all(Object.entries(systemsWithAvailableDependencies).map(async ([sysName, system]:[string, System]) => {
-      if (system.actions?.init) {
-        await dispatch(system.actions.init())
-      }
-      console.log(`system ${sysName} initialised`)
-    }))
+    await Promise.all(
+      Object.entries(systemsWithAvailableDependencies).map(
+        async ([sysName, system]:[string, System]) => {
+          if (system.actions?.init) {
+            await dispatch(system.actions.init())
+          }
+          /* eslint-disable no-console */
+          console.log(`system ${sysName} initialised`)
+        },
+      ),
+    )
     initialised = {
       ...initialised,
       ...systemsWithAvailableDependencies,
@@ -90,7 +95,7 @@ export const init = (dispatch: any) => async (systems: Systems) => {
 export const createApp = <S>(systems: Systems, config: S) => ({
   store: store(systems, config),
   async init() {
-    const { initialised, pending } = await init(this.store.dispatch)(systems)
+    const { pending } = await init(this.store.dispatch)(systems)
     if (Object.keys(pending).length) {
       console.warn(`stalling systems are ${Object.keys(pending)}`)
     }

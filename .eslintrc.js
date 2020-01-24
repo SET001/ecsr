@@ -28,6 +28,7 @@ module.exports = {
     'no-bitwise': 'off',
     'no-plusplus': 'off',
     'implicit-arrow-linebreak': 'off',
+    'no-shadow': 'off',
     
   },
   settings: {
