@@ -1,13 +1,48 @@
 import { combineEpics, ActionsObservable, ofType } from 'redux-observable'
-import { map, filter } from 'rxjs/operators'
+import { map, filter, tap } from 'rxjs/operators'
 import { Dispatch } from '@reduxjs/toolkit'
-import { MovementSystemDependencies, MovementComponent } from '.'
+import { MovementSystemDependencies, MovementComponent, MovementSystemState } from '.'
 import { PositionComponent } from '../position/component'
 import { gameTickAction, gameAddComponentAction, GameAddComponentAction } from '../game/actions'
-import { positionBulkUpdateAction } from '../position/actions'
-import { movementsAddAction } from './actions'
+import { positionBulkUpdateAction, initialisedAction as positionInit } from '../position/actions'
+import { movementsAddAction, updateSystemAction, init } from './actions'
+import { initialisedAction } from '../render/actions'
 
 import { Action } from '..'
+import { RootState } from '../../example'
+
+export const renderInitialisedEpic = ($action: ActionsObservable<any>) => $action.pipe(
+  // tap((action) => console.log({ action })),
+  ofType(initialisedAction.type),
+  map(() => async (dispatch: Dispatch, getState: ()=>RootState) => {
+    // console.log('Mvement system: after render initialise', getState().movement)
+    await dispatch(updateSystemAction({
+      depsinits: [
+        ...getState().movement.depsinits,
+        'a',
+      ],
+    }))
+  }),
+)
+
+export const positionInitialisedEpic = ($action: ActionsObservable<any>) => $action.pipe(
+  // tap((action) => console.log({ action })),
+  ofType(positionInit.type),
+  map(() => async (dispatch: Dispatch<any>, getState: ()=>RootState) => {
+    // console.log('Mvement system: after position initialise', getState().movement)
+    await dispatch(updateSystemAction({
+      depsinits: [
+        ...getState().movement.depsinits,
+        'b',
+      ],
+    }))
+    const state = getState().movement
+    // console.log({ state })
+    if (state.depsinits.length === 2) {
+      dispatch(init)
+    }
+  }),
+)
 
 export const gameAddComponentEpic = ($action: ActionsObservable<any>) => $action.pipe(
   ofType(gameAddComponentAction.type),
@@ -49,4 +84,6 @@ export const movementsGameTickEpic = ($action: ActionsObservable<any>) => $actio
 export const epic = combineEpics(
   gameAddComponentEpic,
   movementsGameTickEpic,
+  // renderInitialisedEpic,
+  // positionInitialisedEpic,
 )

@@ -67,6 +67,7 @@ export const init = (dispatch: any) => async (systems: Systems) => {
   const ff = (where: Systems) => (system: System) => Object.values(where).includes(system)
   let systemsWithAvailableDependencies: Systems = {}
   /* eslint-disable no-await-in-loop */
+  // TODO: refactor this to avoid usage of do-while loop and increase testability of this code
   do {
     systemsWithAvailableDependencies = filter(isDepsSatisfied(initialised))(pending)
     await Promise.all(
