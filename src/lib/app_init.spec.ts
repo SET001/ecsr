@@ -1,8 +1,6 @@
 import { assert } from 'chai'
 import {
   init, isDepsSatisfied,
-  // initParse,
-  // initParseSysNames
 } from './createApp'
 import { System } from './system'
 
@@ -10,7 +8,9 @@ const createTestSystem = (config = {}): System => ({
   epic: null,
   state: {},
   actions: {
-    init: async () => new Promise((resolve) => setTimeout(resolve, Math.round(Math.random() * 10) * 1000)),
+    init: async () => new Promise(
+      (resolve) => setTimeout(resolve, Math.round(Math.random() * 10) * 100),
+    ),
   },
   reducer: null,
   deps: [],
@@ -35,7 +35,7 @@ const unmetDepsSystem:System = createTestSystem({
   deps: [nonExistentSystem],
 })
 
-describe.only('App', () => {
+describe('App', () => {
   describe('isDepsSatisfied', () => {
     it('should return true if system does not have any dependencies', () => {
       assert.isTrue(isDepsSatisfied({})(systemB))
@@ -57,9 +57,10 @@ describe.only('App', () => {
   })
 
   describe('init', () => {
+    //  TODO: decompose this test
     it('sss', async () => {
       const dispatch = (action: any) => action
-      const parsed = await init(dispatch)({
+      const { ready, pending } = await init(dispatch)({
         systemA,
         systemC,
         systemD,
@@ -68,8 +69,11 @@ describe.only('App', () => {
         systemB,
         unmetDepsSystem,
       })
-    //   console.log({ parsed })
-    //   // console.log({ parsed: initParseSysNames(parsed) })
+      assert.isDefined(pending.unmetDepsSystem)
+      assert.isDefined(ready.systemA)
+      assert.isDefined(ready.systemC)
+      assert.isDefined(ready.systemD)
+      assert.isDefined(ready.systemB)
     }).timeout(60000)
   })
 })

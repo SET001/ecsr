@@ -47,11 +47,11 @@ type EntryFilter<T> = (s: T)=>boolean
 
 type SystemEntry = Entry<System>
 type SysEntryFilter = EntryFilter<SystemEntry>
-// interface InitParse{
-//   ready: Systems
-//   pending: Systems
-//   stalled: Systems
-// }
+
+interface InitResult{
+  ready: Systems
+  pending: Systems
+}
 
 
 export const isDepsSatisfied = (initilizedSystems: Systems) => (system: System) => {
@@ -59,8 +59,8 @@ export const isDepsSatisfied = (initilizedSystems: Systems) => (system: System) 
   return all(f)(system.deps)
 }
 
-export const init = (dispatch: any) => async (systems: Systems) => {
-  let initialised:Systems = {}
+export const init = (dispatch: any) => async (systems: Systems): Promise<InitResult> => {
+  let ready:Systems = {}
   let pending = {
     ...systems,
   }
@@ -69,26 +69,27 @@ export const init = (dispatch: any) => async (systems: Systems) => {
   /* eslint-disable no-await-in-loop */
   // TODO: refactor this to avoid usage of do-while loop and increase testability of this code
   do {
-    systemsWithAvailableDependencies = filter(isDepsSatisfied(initialised))(pending)
+    systemsWithAvailableDependencies = filter(isDepsSatisfied(ready))(pending)
     await Promise.all(
       Object.entries(systemsWithAvailableDependencies).map(
         async ([sysName, system]:[string, System]) => {
           if (system.actions?.init) {
             await dispatch(system.actions.init())
           }
+          //  TODO: made this output only in dev env
           /* eslint-disable no-console */
           console.log(`system ${sysName} initialised`)
         },
       ),
     )
-    initialised = {
-      ...initialised,
+    ready = {
+      ...ready,
       ...systemsWithAvailableDependencies,
     }
     pending = reject(ff(systemsWithAvailableDependencies))(pending)
   } while (keys(systemsWithAvailableDependencies).length)
   return {
-    initialised,
+    ready,
     pending,
   }
 }
