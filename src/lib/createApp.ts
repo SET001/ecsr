@@ -1,14 +1,32 @@
 import {
   createStore, applyMiddleware, Store, combineReducers,
 } from '@reduxjs/toolkit'
-import { createEpicMiddleware, combineEpics } from 'redux-observable'
+import {
+  createEpicMiddleware, combineEpics, ActionsObservable, ofType, StateObservable,
+} from 'redux-observable'
 import thunk from 'redux-thunk'
 import {
   reject, filter, keys, all,
 } from 'ramda'
-import { System } from './system'
+import { map, filter as rxfilter } from 'rxjs/operators'
+import { System, SystemSubscription } from './system'
 
 type Systems = {[key: string]: System}
+
+export const createSubscriptionEpic = (subscription: SystemSubscription, action: string) =>
+  ($action: ActionsObservable<any>, $state: StateObservable<any>) => $action.pipe(
+    ofType(action),
+    rxfilter(subscription.filter),
+    map(subscription.map),
+  )
+
+
+export const createSystemEpic = (system: System) => {
+  const epics = Object.entries(system.subscriptions).map(
+    ([action, subscription]) => createSubscriptionEpic(subscription, action),
+  )
+  return combineEpics(...epics)
+}
 
 const reduceSystems = (fieldName: keyof System) =>
   (systems: Systems) => Object.entries(systems).reduce((
@@ -21,9 +39,9 @@ const reduceSystems = (fieldName: keyof System) =>
 
 const epic = (systems: Systems) => {
   const epics = Object.entries(systems).map(
-    ([, system]: [string, System]) => system.epic,
+    ([, system]) => createSystemEpic(system),
   )
-  return combineEpics.apply(combineEpics, epics)
+  return combineEpics(...epics)
 }
 
 const reducer = reduceSystems('reducer')

@@ -1,5 +1,14 @@
 import { Epic } from 'redux-observable'
 import { Reducer } from '@reduxjs/toolkit'
+// import { ThunkAction } from 'redux-thunk'
+import { Action } from '.'
+
+export interface SystemSubscription{
+  filter: (action: Action)=>boolean
+  map: (action: Action)=>Function
+}
+
+export type SystemSubscriptions = {[key: string]: SystemSubscription}
 
 export interface System<T = any>{
   reducer: Reducer
@@ -8,4 +17,5 @@ export interface System<T = any>{
   state: T
   deps: System[]
   // components: ComponentConstructor[]
+  subscriptions?: SystemSubscriptions
 }
