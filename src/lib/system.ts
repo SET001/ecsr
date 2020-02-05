@@ -5,7 +5,7 @@ import { Action } from '.'
 
 export interface SystemSubscription{
   filter: (action: Action)=>boolean
-  map: (action: Action)=>Function
+  map: (action: Action)=>any
 }
 
 export type SystemSubscriptions = {[key: string]: SystemSubscription}

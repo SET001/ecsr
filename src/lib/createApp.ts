@@ -2,7 +2,7 @@ import {
   createStore, applyMiddleware, Store, combineReducers,
 } from '@reduxjs/toolkit'
 import {
-  createEpicMiddleware, combineEpics, ActionsObservable, ofType, StateObservable,
+  createEpicMiddleware, combineEpics, ActionsObservable, ofType, Epic,
 } from 'redux-observable'
 import thunk from 'redux-thunk'
 import {
@@ -14,7 +14,7 @@ import { System, SystemSubscription } from './system'
 type Systems = {[key: string]: System}
 
 export const createSubscriptionEpic = (subscription: SystemSubscription, action: string) =>
-  ($action: ActionsObservable<any>, $state: StateObservable<any>) => $action.pipe(
+  ($action: ActionsObservable<any>) => $action.pipe(
     ofType(action),
     rxfilter(subscription.filter),
     map(subscription.map),
@@ -22,6 +22,7 @@ export const createSubscriptionEpic = (subscription: SystemSubscription, action:
 
 
 export const createSystemEpic = (system: System) => {
+  if (!system.subscriptions) return false
   const epics = Object.entries(system.subscriptions).map(
     ([action, subscription]) => createSubscriptionEpic(subscription, action),
   )
@@ -40,7 +41,7 @@ const reduceSystems = (fieldName: keyof System) =>
 const epic = (systems: Systems) => {
   const epics = Object.entries(systems).map(
     ([, system]) => createSystemEpic(system),
-  )
+  ).filter((epic) => !!epic) as Epic<any, any, any, any>[]
   return combineEpics(...epics)
 }
 

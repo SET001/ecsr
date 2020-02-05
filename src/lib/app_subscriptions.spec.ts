@@ -8,12 +8,10 @@ import { assert } from 'chai'
 import { createSystemEpic } from './createApp'
 import { System, Action, createSubscriptionEpic } from '.'
 
-
 export const testAction = createAction<void>('game/tick')
 const subscriptionFilter = (action: Action) => !!action
 
 const subscriptionThunk = (dispatch: any, getState: any) => {
-  console.log('asdd')
   dispatch({ type: 'test' })
 }
 const subscriptionMapper = (action: Action) => subscriptionThunk
@@ -22,9 +20,9 @@ const systemA: System = {
   epic: null,
   state: {},
   actions: {
-    init: async () => new Promise(
-      (resolve) => setTimeout(resolve, Math.round(Math.random() * 10) * 100),
-    ),
+    init: async () =>
+      new Promise((resolve) =>
+        setTimeout(resolve, Math.round(Math.random() * 10) * 100)),
   },
   reducer: null,
   deps: [],
@@ -40,17 +38,25 @@ const testScheduler = new TestScheduler((actual, expected) => {
   assert.deepEqual(expected, actual)
 })
 
+describe('App', () => {
+  describe('createSystemEpic', () => {
+    it('should return', () => {
 
-describe.only('App', () => {
-  describe('Subscriptions', () => {
-    it('should work', () => {
+    })
+  })
+
+  describe('createSubscriptionEpic', () => {
+    it('should return subscription thunk', () => {
       testScheduler.run(({ hot, expectObservable }) => {
         const actionInput$ = hot('--a', {
           a: { type: testAction.type },
         })
         const action$ = new ActionsObservable(actionInput$)
-        const epic = createSubscriptionEpic(systemA.subscriptions[testAction.type], testAction.type)
-        const output$ = epic(action$, null)
+        const epic = createSubscriptionEpic(
+          systemA.subscriptions[testAction.type],
+          testAction.type,
+        )
+        const output$ = epic(action$)
         expectObservable(output$).toBe('--a', {
           a: subscriptionThunk,
         })
