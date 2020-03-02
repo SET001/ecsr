@@ -29,20 +29,29 @@ export const init = () => async (dispatch: Dispatch, getState: ()=>RenderSystemD
   }))
   const { container, engine } = getState().render
   engine.init(container)
-
-  const renderLoop = () => {
-    engine.render()
-    requestAnimationFrame(renderLoop)
-  }
-  renderLoop()
+  engine.render()
+  // const renderLoop = () => {
+  //   engine.render()
+  //   requestAnimationFrame(renderLoop)
+  // }
+  // renderLoop()
 }
 
 export const addObject = (action: Action<GameAddComponentAction<RenderComponent>>) => (
   dispatch: Dispatch,
   getState: ()=>RenderSystemDependencies,
 ) => {
+  console.log('render sytem: adding object', action)
   const { engine } = getState().render
   engine.addMesh(action.payload.component.mesh)
+}
+
+export const render = () => (
+  dispatch: Dispatch,
+  getState: ()=>RenderSystemDependencies,
+) => {
+  const { engine } = getState().render
+  engine.render()
 }
 
 

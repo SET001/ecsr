@@ -1,9 +1,9 @@
-import { Component, System } from '..'
+import { Component, System, Action } from '..'
 import * as actions from './actions'
 import { reducer } from './reducer'
-import { epic } from './epic'
 import { PositionSystemState } from '../systems'
 import { state } from './state'
+import { gameAddComponentAction, GameAddComponentAction, gameTickAction } from '../game/actions'
 
 export class RenderComponent extends Component {
   constructor(
@@ -31,7 +31,16 @@ export interface RenderSystemDependencies{
 export const render: System<RenderSystemState> = ({
   actions,
   reducer,
-  epic,
   state,
   deps: [],
+  subscriptions: {
+    [gameAddComponentAction.type]: {
+      filter: (action: Action<GameAddComponentAction>) => action.payload.component.name === 'RenderComponent',
+      map: actions.addObject,
+    },
+    [gameTickAction.type]: {
+      filter: () => true,
+      map: actions.render,
+    },
+  },
 })
