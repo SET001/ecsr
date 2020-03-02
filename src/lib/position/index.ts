@@ -2,13 +2,17 @@ import { System } from '..'
 import * as actions from './actions'
 import { reducer } from './reducer'
 import { PositionSystemState } from '../systems'
-import { epic } from './epic'
 import { state } from './state'
+import { gameAddComponentAction } from '../game/actions'
+import { matchComponent } from '../utils'
+
 
 export const position: System<PositionSystemState> = {
   actions,
   reducer,
-  epic,
   state,
   deps: [],
+  subscriptions: {
+    [gameAddComponentAction.type]: matchComponent('PositionComponent', actions.addPosition),
+  },
 }

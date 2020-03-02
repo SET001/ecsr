@@ -1,9 +1,10 @@
-import { Component, System, Action } from '..'
+import { Component, System } from '..'
 import * as actions from './actions'
 import { reducer } from './reducer'
 import { PositionSystemState } from '../systems'
 import { state } from './state'
-import { gameAddComponentAction, GameAddComponentAction, gameTickAction } from '../game/actions'
+import { gameAddComponentAction, gameTickAction } from '../game/actions'
+import { matchComponent } from '../utils'
 
 export class RenderComponent extends Component {
   constructor(
@@ -34,10 +35,7 @@ export const render: System<RenderSystemState> = ({
   state,
   deps: [],
   subscriptions: {
-    [gameAddComponentAction.type]: {
-      filter: (action: Action<GameAddComponentAction>) => action.payload.component.name === 'RenderComponent',
-      map: actions.addObject,
-    },
+    [gameAddComponentAction.type]: matchComponent('RenderComponent', actions.addObject),
     [gameTickAction.type]: {
       filter: () => true,
       map: actions.render,

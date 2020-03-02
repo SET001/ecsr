@@ -1,7 +1,6 @@
 import { System } from '..'
 import * as actions from './actions'
 import { reducer } from './reducer'
-import { epic } from './epic'
 import { state } from './state'
 
 export interface GameState{
@@ -17,7 +16,6 @@ export interface GameSystemDependencies{
 export const game: System<GameState> = {
   actions,
   reducer,
-  epic,
   state,
   deps: [],
 }
