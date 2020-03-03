@@ -8,7 +8,10 @@
     "test:watch": "nodemon ./src --ext ts --exec 'npm test'",
     "compile:watch": "gulp watch",
     "eslint": "eslint --fix ./src/**/*.{ts,tsx}",
-    "checkCD": "madge --circular src/example/index.ts"
+    "checkCD": "madge --circular src/example/index.ts",
+    "publish:patch": "npm version patch && npm publish && git push --follow-tags",
+    "publish:minor": "npm version minor && npm publish && git push --follow-tags",
+    "publish:major": "npm version major && npm publish && git push --follow-tags"
   },
   "keywords": [],
   "author": "",
