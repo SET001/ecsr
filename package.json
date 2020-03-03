@@ -13,7 +13,7 @@
     "publish:minor": "npm version minor && npm publish && git push --follow-tags",
     "publish:major": "npm version major && npm publish && git push --follow-tags"
   },
-  "keywords": [],
+  "keywords": ["ecs", "gamedev", "redux"],
   "author": "",
   "license": "ISC",
   "dependencies": {
