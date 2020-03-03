@@ -5,7 +5,6 @@ import {
 import { System } from './system'
 
 const createTestSystem = (config = {}): System => ({
-  epic: null,
   state: {},
   actions: {
     init: async () => new Promise(
