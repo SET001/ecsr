@@ -19,6 +19,7 @@
     "gamedev",
     "redux"
   ],
+  "repository": "SET001/ecsr",
   "author": "",
   "license": "ISC",
   "dependencies": {
