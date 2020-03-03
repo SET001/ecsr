@@ -11,6 +11,7 @@ export * from './reducers'
 export * from './system'
 export * from './systems'
 export * from './component'
+export * from './components'
 export * from './createApp'
 
 export * from './render'
