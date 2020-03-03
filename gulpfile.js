@@ -17,7 +17,7 @@ const browserify = require('browserify')
 //   .pipe(dest('./public')))
 
 
-task('compile', () => src('src/**/!(*.spec).{ts,tsx}', { since: lastRun('compile') })
+task('compile', () => src('src/index.ts', { since: lastRun('compile') })
   .pipe(sourcemaps.init())
   .pipe(tsProject())
   .on('error', function onError(error) {

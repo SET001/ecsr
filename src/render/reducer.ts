@@ -4,6 +4,6 @@ import { updateSystemAction } from './actions'
 import { udpateFromPayload } from '..'
 import { state as defaultState } from './state'
 
-export const reducer = createReducer<RenderSystemState>(defaultState, {
+export const reducer: any = createReducer<RenderSystemState>(defaultState, {
   [updateSystemAction.type]: udpateFromPayload,
 })

@@ -7,7 +7,7 @@ import {
 import { state } from './state'
 import { GameState } from '.'
 
-export const reducer = createReducer(state, {
+export const reducer: any = createReducer(state, {
   [gameTickAction.type]: increment<GameState>('tick'),
   [gameAddObjectAction.type]: increment<GameState>('gameID'),
   [gameAddComponentAction.type]: increment<GameState>('componentID'),

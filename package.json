@@ -2,7 +2,8 @@
   "name": "ecsr",
   "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register -r jsdom-global/register '**/*.spec.ts'",
     "test:watch": "nodemon ./src --ext ts --exec 'npm test'",

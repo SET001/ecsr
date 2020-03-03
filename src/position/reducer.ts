@@ -5,7 +5,7 @@ import { PositionComponent } from '../components/position'
 import { PositionSystemState } from '../systems'
 import { state as defaultState } from './state'
 
-export const reducer = createReducer(defaultState, {
+export const reducer: any = createReducer(defaultState, {
   [positionBulkUpdateAction.type]: (
     state: PositionSystemState,
     action: Action<PositionComponent[]>,
