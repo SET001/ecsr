@@ -1,23 +1,19 @@
 import { createAction } from '@reduxjs/toolkit'
 // import { ThunkDispatch } from 'redux-thunk'
 import { TestScheduler } from 'rxjs/testing'
-import { ActionsObservable, StateObservable, ofType } from 'redux-observable'
-import { mergeMap, mapTo } from 'rxjs/operators'
-import { map } from 'ramda'
+import { ActionsObservable } from 'redux-observable'
 import { assert } from 'chai'
-import { createSystemEpic } from './createApp'
 import { System, Action, createSubscriptionEpic } from '.'
 
 export const testAction = createAction<void>('game/tick')
 const subscriptionFilter = (action: Action) => !!action
 
-const subscriptionThunk = (dispatch: any, getState: any) => {
+const subscriptionThunk = (dispatch: any) => {
   dispatch({ type: 'test' })
 }
-const subscriptionMapper = (action: Action) => subscriptionThunk
+const subscriptionMapper = () => subscriptionThunk
 
 const systemA: System = {
-  epic: null,
   state: {},
   actions: {
     init: async () =>
@@ -39,11 +35,11 @@ const testScheduler = new TestScheduler((actual, expected) => {
 })
 
 describe('App', () => {
-  describe('createSystemEpic', () => {
-    it('should return', () => {
+  // describe('createSystemEpic', () => {
+  //   it('should return', () => {
 
-    })
-  })
+  //   })
+  // })
 
   describe('createSubscriptionEpic', () => {
     it('should return subscription thunk', () => {
