@@ -1,6 +1,6 @@
 {
   "name": "ecsr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,11 @@
     "publish:minor": "npm version minor && npm publish && git push --follow-tags",
     "publish:major": "npm version major && npm publish && git push --follow-tags"
   },
-  "keywords": ["ecs", "gamedev", "redux"],
+  "keywords": [
+    "ecs",
+    "gamedev",
+    "redux"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
