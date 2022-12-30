@@ -28,7 +28,7 @@
     "gulp": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "pixi.js": "^5.2.0",
     "ramda": "^0.26.1",
     "redux-create-reducer": "^2.0.0",
